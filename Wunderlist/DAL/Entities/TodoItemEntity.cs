@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class DalTodoItem
+    public class TodoItemEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -15,6 +15,6 @@ namespace DAL.Entities
         public DateTime? DueDate { get; set; }
 
         public int DalTodoListId { get; set; }
-        public virtual DalTodoList DalTodoList { get; set; }
+        public virtual TodoListEntity DalTodoList { get; set; }
     }
 }

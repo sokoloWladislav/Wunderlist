@@ -7,8 +7,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAL.Entities
 {
-    public class DalApplicationUser : IdentityUser
+    public class ApplicationUserEntity : IdentityUser
     {
-        public virtual ICollection<DalTodoList> TodoLists { get; set; } = new List<DalTodoList>();
+        public virtual ICollection<TodoListEntity> TodoLists { get; set; } = new List<TodoListEntity>();
     }
 }

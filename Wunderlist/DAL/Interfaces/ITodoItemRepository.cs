@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DAL.Entities;
 
 namespace DAL.Interfaces
 {
-    public interface ITodoItemRepository
+    public interface ITodoItemRepository : IDisposable
     {
+        void Create(TodoItemEntity item);
+        void Delete(TodoItemEntity item);
+        void Update(TodoItemEntity item);
+        TodoItemEntity GetTodoItemById(int id);
+        IEnumerable<TodoItemEntity> GetAllTodoItems();
     }
 }

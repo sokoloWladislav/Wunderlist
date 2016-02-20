@@ -9,10 +9,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAL
 {
-    public class ApplicationContext : IdentityDbContext<DalApplicationUser>
+    public class ApplicationContext : IdentityDbContext<ApplicationUserEntity>
     {
         public ApplicationContext(string connectionString) : base(connectionString) { }
-        public DbSet<DalTodoList> TodoLists { get; set; }
-        public DbSet<DalTodoItem> TodoItems { get; set; }
+        public DbSet<TodoListEntity> TodoLists { get; set; }
+        public DbSet<TodoItemEntity> TodoItems { get; set; }
     }
 }

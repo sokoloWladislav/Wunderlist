@@ -58,9 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
-    <Compile Include="Entities\DalApplicationUser.cs" />
-    <Compile Include="Entities\DalTodoItem.cs" />
-    <Compile Include="Entities\DalTodoList.cs" />
+    <Compile Include="Entities\ApplicationUserEntity.cs" />
+    <Compile Include="Entities\TodoItemEntity.cs" />
+    <Compile Include="Entities\TodoListEntity.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Interfaces\ITodoItemRepository.cs" />
     <Compile Include="Interfaces\ITodoListRepository.cs" />
