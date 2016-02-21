@@ -8,5 +8,6 @@ namespace DAL.Interfaces
         ApplicationUserManager UserManager { get; }
         ITodoListRepository TodoListRepository { get; }
         ITodoItemRepository TodoItemRepository { get; }
+        void Commit();
     }
 }
