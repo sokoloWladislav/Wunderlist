@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BLL.DTO;
 using BLL.Infrastructure;
 
 namespace BLL.Interfaces
 {
-    public interface ITodoItemService
+    public interface ITodoItemService : IDisposable
     {
         OperationDetails CreateTodoItem(TodoItemDTO item);
         OperationDetails DeleteTodoItem(TodoItemDTO item);

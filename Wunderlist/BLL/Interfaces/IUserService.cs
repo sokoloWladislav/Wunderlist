@@ -9,7 +9,7 @@ using BLL.Infrastructure;
 
 namespace BLL.Interfaces
 {
-    public interface IUserService
+    public interface IUserService : IDisposable
     {
         OperationDetails CreateUser(ApplicationUserDTO user);
         OperationDetails DeleteUser(ApplicationUserDTO user);

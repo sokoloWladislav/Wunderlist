@@ -9,6 +9,7 @@ namespace DAL.Entities
 {
     public class ApplicationUserEntity : IdentityUser
     {
+        public string UserProfileName { get; set; }
         public virtual ICollection<TodoListEntity> TodoLists { get; set; } = new List<TodoListEntity>();
     }
 }

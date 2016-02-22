@@ -13,7 +13,7 @@ namespace DAL
     {
         static ApplicationContext()
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationContext>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationContext>());
         }
         public ApplicationContext(string connectionString) : base(connectionString) { }
         public DbSet<TodoListEntity> TodoLists { get; set; }

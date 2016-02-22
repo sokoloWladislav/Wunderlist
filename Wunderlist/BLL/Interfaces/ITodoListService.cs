@@ -9,7 +9,7 @@ using BLL.Infrastructure;
 
 namespace BLL.Interfaces
 {
-    public interface ITodoListService
+    public interface ITodoListService : IDisposable
     {
         OperationDetails CreateTodoList(TodoListDTO list);
         OperationDetails DeleteTodoList(TodoListDTO list);

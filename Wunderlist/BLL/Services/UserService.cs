@@ -25,10 +25,10 @@ namespace BLL.Services
 
         public OperationDetails CreateUser(ApplicationUserDTO user)
         {
-            ApplicationUserEntity appUser = db.UserManager.FindByEmail(user.Email);
+            ApplicationUserEntity appUser = db.UserManager.FindByName(user.UserName);
             if (appUser == null)
             {
-                appUser = new ApplicationUserEntity { Email = user.Email, UserName = user.UserName };
+                appUser = new ApplicationUserEntity { UserName = user.UserName, UserProfileName = user.UserProfileName };
                 db.UserManager.Create(appUser, user.Password);
                 db.Commit();
                 return new OperationDetails(true, "Регистрация успешно пройдена", "");
