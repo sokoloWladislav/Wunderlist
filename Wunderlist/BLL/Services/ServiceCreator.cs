@@ -1,9 +1,11 @@
-﻿using BLL.Interfaces;
+﻿using BLL.Interface.Interfaces;
+using DAL.Interface.Repositories;
+using DAL.Interface.Entities;
 using DAL.Repositories;
 
 namespace BLL.Services
 {
-    public class ServiceCreator : IServiceCreator
+    /*public class ServiceCreator : IServiceCreator
     {
         public IUserService CreateUserService(string connection)
         {
@@ -19,5 +21,11 @@ namespace BLL.Services
         {
             return new TodoItemService(new UnitOfWork(connection));
         }
-    }
+        /*private readonly UnitOfWork _uow;
+
+        public ServiceCreator(UnitOfWork unitOfWork)
+        {
+            
+        }
+    }*/
 }

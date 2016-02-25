@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using BLL.DTO;
-using BLL.Infrastructure;
+using BLL.Interface.DTO;
+using BLL.Interface.Infrastructure;
 
-namespace BLL.Interfaces
+namespace BLL.Interface.Interfaces
 {
     public interface ITodoItemService : IDisposable
     {

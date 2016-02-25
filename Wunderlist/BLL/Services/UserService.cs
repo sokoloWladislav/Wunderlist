@@ -1,36 +1,41 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
 using AutoMapper;
-using BLL.DTO;
-using BLL.Infrastructure;
-using BLL.Interfaces;
-using DAL.Entities;
-using DAL.Interfaces;
+using BLL.Interface.DTO;
+using BLL.Interface.Infrastructure;
+using BLL.Interface.Interfaces;
+using DAL.Interface.Entities;
+using DAL.Interface.Identity;
+using DAL.Interface.Repositories;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BLL.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUnitOfWork db;
+        private readonly IUnitOfWork _uow;
+        //move to repo!!!
+        private readonly ApplicationUserManager _userManager;
 
         private readonly IMapper mapper;
 
-        public UserService(IUnitOfWork uow)
+        public UserService(IUnitOfWork uow, ApplicationUserManager userManager)
         {
-            db = uow;
+            _uow = uow;
             var config = new MapperConfiguration(cfg => { cfg.CreateMap<ApplicationUserEntity, ApplicationUserDTO>(); });
             mapper = config.CreateMapper();
+            _userManager = userManager;
         }
 
         public OperationDetails CreateUser(ApplicationUserDTO user)
         {
-            ApplicationUserEntity appUser = db.UserManager.FindByName(user.UserName);
+            var appUser = _userManager.FindByName(user.UserName);
             if (appUser == null)
             {
                 appUser = new ApplicationUserEntity { UserName = user.UserName, UserProfileName = user.UserProfileName };
-                db.UserManager.Create(appUser, user.Password);
-                db.Commit();
+                _userManager.Create(appUser, user.Password);
+                _uow.Commit();
                 return new OperationDetails(true, "Регистрация успешно пройдена", "");
             }
             return new OperationDetails(false, "Пользователь с таким email уже существует", "");
@@ -38,11 +43,11 @@ namespace BLL.Services
 
         public OperationDetails DeleteUser(ApplicationUserDTO user)
         {
-            ApplicationUserEntity appUser = db.UserManager.FindByName(user.UserName);
+            ApplicationUserEntity appUser = _userManager.FindByName(user.UserName);
             if (appUser != null)
             {
-                db.UserManager.Delete(appUser);
-                db.Commit();
+                _userManager.Delete(appUser);
+                _uow.Commit();
                 return new OperationDetails(true, "Удаление прошло успешно", "");
             }
             return new OperationDetails(false, "Пользователь, который должен быть удален не существует", "");
@@ -50,27 +55,27 @@ namespace BLL.Services
 
         public IEnumerable<ApplicationUserDTO> GetAllUsers()
         {
-            return mapper.Map<IEnumerable<ApplicationUserEntity>, IEnumerable<ApplicationUserDTO>>(db.UserManager.Users);
+            return mapper.Map<IEnumerable<ApplicationUserEntity>, IEnumerable<ApplicationUserDTO>>(_userManager.Users);
         }
 
         public ApplicationUserDTO GetUserById(string id)
         {
 
-            return mapper.Map<ApplicationUserEntity, ApplicationUserDTO>(db.UserManager.FindById(id));
+            return mapper.Map<ApplicationUserEntity, ApplicationUserDTO>(_userManager.FindById(id));
         }
 
         public ClaimsIdentity Authenticate(ApplicationUserDTO userDto)
         {
             ClaimsIdentity claim = null;
-            ApplicationUserEntity user = db.UserManager.Find(userDto.UserName, userDto.Password);
+            ApplicationUserEntity user = _userManager.Find(userDto.UserName, userDto.Password);
             if (user != null)
-                claim = db.UserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+                claim = _userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
             return claim;
         }
 
         public void Dispose()
         {
-            db.Dispose();
+            _uow.Dispose();
         }
     }
 }

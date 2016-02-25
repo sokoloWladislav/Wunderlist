@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace DAL.Entities
+namespace DAL.Interface.Entities
 {
     public class ApplicationUserEntity : IdentityUser
     {

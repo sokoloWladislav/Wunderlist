@@ -1,7 +1,7 @@
-﻿using DAL.Entities;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
+using DAL.Interface.Entities;
 
-namespace DAL.Identity
+namespace DAL.Interface.Identity
 {
     public class ApplicationUserManager : UserManager<ApplicationUserEntity>
     {

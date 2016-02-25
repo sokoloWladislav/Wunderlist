@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using DAL.Entities;
+using DAL.Interface.Entities;
 
-namespace DAL.Interfaces
+namespace DAL.Interface.Repositories
 {
     public interface ITodoItemRepository : IDisposable
     {

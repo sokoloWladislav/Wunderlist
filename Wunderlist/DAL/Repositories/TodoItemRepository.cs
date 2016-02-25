@@ -1,42 +1,55 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using DAL.Entities;
-using DAL.Interfaces;
+using System.Linq;
+using DAL.Interface.Entities;
+using DAL.Interface.Repositories;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAL.Repositories
 {
     public class TodoItemRepository : ITodoItemRepository
     {
-        public ApplicationContext db { get; set; }
-
-        public TodoItemRepository(ApplicationContext context)
+        private readonly IdentityDbContext<ApplicationUserEntity> _db;
+        private readonly DbSet<TodoItemEntity> _todoEntityDbSet;
+        public TodoItemRepository(IdentityDbContext<ApplicationUserEntity> context)
         {
-            db = context;
+            _db = context;
+            _todoEntityDbSet = context.Set<TodoItemEntity>();
         }
 
         public void Create(TodoItemEntity item)
         {
-            db.TodoItems.Add(item);
+            _todoEntityDbSet.Add(item);
         }
 
         public void Delete(TodoItemEntity item)
         {
-            db.TodoItems.Remove(item);
+            _todoEntityDbSet.Remove(item);
+
         }
 
         public void Update(TodoItemEntity item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            var entity = _db.Set<TodoItemEntity>().FirstOrDefault(x => x.Id == item.Id);
+            if (entity != null)
+            {
+                entity.DueDate = item.DueDate;
+                entity.IsCompleted = item.IsCompleted;
+                entity.Name = item.Name;
+                entity.Note = item.Note;
+                entity.TodoListEntityId = item.TodoListEntityId;
+                _db.Entry(item).State = EntityState.Modified;
+            }
         }
 
         public TodoItemEntity GetTodoItemById(int id)
         {
-            return db.TodoItems.Find(id);
+            return _todoEntityDbSet.Find(id);
         }
 
         public IEnumerable<TodoItemEntity> GetAllTodoItems()
         {
-            return db.TodoItems;
+            return _db.Set<TodoItemEntity>().AsEnumerable();
         }
 
         /*public TodoItemEntity GetTodoItemByName(string name)
@@ -47,7 +60,7 @@ namespace DAL.Repositories
 
         public void Dispose()
         {
-            db.Dispose();
+            _db.Dispose();
         }
     }
 }
