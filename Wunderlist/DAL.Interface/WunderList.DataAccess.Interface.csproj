@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{07E29D79-3CCC-49BC-B5AA-118DCBC830E1}</ProjectGuid>
+    <ProjectGuid>{4CE3C7D3-D5BD-4F70-A88C-C3864F0ED99B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BLL</RootNamespace>
-    <AssemblyName>BLL</AssemblyName>
+    <RootNamespace>DAL.Interface</RootNamespace>
+    <AssemblyName>DAL.Interface</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -61,28 +57,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\ApplicationUserEntity.cs" />
+    <Compile Include="Entities\ApplicationUserProfileEntity.cs" />
+    <Compile Include="Entities\TodoItemEntity.cs" />
+    <Compile Include="Entities\TodoListEntity.cs" />
+    <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\TodoItemService.cs" />
-    <Compile Include="Services\TodoListService.cs" />
-    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Repositories\ITodoItemRepository.cs" />
+    <Compile Include="Repositories\ITodolistRepository.cs" />
+    <Compile Include="Repositories\IUnitOfWork.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BLL.Interface\BLL.Interface.csproj">
-      <Project>{f6de60ab-5fbc-48bc-ad4a-271d13f21629}</Project>
-      <Name>BLL.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DAL.Interface\WunderList.DataAccess.Interface.csproj">
-      <Project>{4ce3c7d3-d5bd-4f70-a88c-c3864f0ed99b}</Project>
-      <Name>WunderList.DataAccess.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DAL\WunderList.DataAccess.EFSqlServer.csproj">
-      <Project>{27c79b01-bcf6-4c51-b265-dd937ae8ed25}</Project>
-      <Name>WunderList.DataAccess.EFSqlServer</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

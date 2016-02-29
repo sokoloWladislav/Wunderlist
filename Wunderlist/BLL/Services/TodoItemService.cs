@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using BLL.DTO;
-using BLL.Infrastructure;
-using BLL.Interfaces;
-using DAL.Entities;
-using DAL.Interfaces;
+using BLL.Interface.DTO;
+using BLL.Interface.Infrastructure;
+using BLL.Interface.Interfaces;
+using DAL.Interface.Entities;
+using DAL.Interface.Repositories;
 
 namespace BLL.Services
 {
@@ -12,13 +12,16 @@ namespace BLL.Services
     {
         private readonly IUnitOfWork db;
 
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
 
-        public TodoItemService(IUnitOfWork uow)
+        private readonly ITodoItemRepository _todoItemRepository;
+
+        public TodoItemService(IUnitOfWork uow,ITodoItemRepository todoItemRepository)
         {
+            _todoItemRepository = todoItemRepository;
             db = uow;
             var config = new MapperConfiguration(cfg => { cfg.CreateMap<TodoItemEntity, TodoItemDTO>(); });
-            mapper = config.CreateMapper();
+            _mapper = config.CreateMapper();
         }
         public OperationDetails CreateTodoItem(TodoItemDTO todoItem)
         {
@@ -29,17 +32,17 @@ namespace BLL.Services
                 Note = todoItem.Note,
                 IsCompleted = false
             };
-            db.TodoItemRepository.Create(todoItemEntity);
+            _todoItemRepository.Create(todoItemEntity);
             db.Commit();
             return new OperationDetails(true, "TodoItem успешно добавлен", "");
         }
 
         public OperationDetails DeleteTodoItem(TodoItemDTO todoItem)
         {
-            TodoItemEntity todoItemEntity = db.TodoItemRepository.GetTodoItemById(todoItem.Id);
+            TodoItemEntity todoItemEntity = _todoItemRepository.GetTodoItemById(todoItem.Id);
             if (todoItemEntity != null)
             {
-                db.TodoItemRepository.Delete(todoItemEntity);
+                _todoItemRepository.Delete(todoItemEntity);
                 db.Commit();
                 return new OperationDetails(true, "TodoItem успешно удален", "");
             }
@@ -48,13 +51,13 @@ namespace BLL.Services
 
         public TodoItemDTO GetTodoItemById(int id)
         {
-            TodoItemDTO todoItem = mapper.Map<TodoItemEntity, TodoItemDTO>(db.TodoItemRepository.GetTodoItemById(id));
+            TodoItemDTO todoItem = _mapper.Map<TodoItemEntity, TodoItemDTO>(_todoItemRepository.GetTodoItemById(id));
             return todoItem;
         }
 
         public IEnumerable<TodoItemDTO> GetAllTodoItems()
         {
-            var todoItems = mapper.Map<IEnumerable<TodoItemEntity>, List<TodoItemDTO>>(db.TodoItemRepository.GetAllTodoItems());
+            var todoItems = _mapper.Map<IEnumerable<TodoItemEntity>, List<TodoItemDTO>>(_todoItemRepository.GetAllTodoItems());
             return todoItems;
         }
 

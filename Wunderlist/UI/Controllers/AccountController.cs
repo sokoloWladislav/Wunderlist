@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Net;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
-using BLL.DTO;
-using BLL.Infrastructure;
-using BLL.Interfaces;
+using BLL.Interface.DTO;
+using BLL.Interface.Infrastructure;
+using BLL.Interface.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -16,9 +14,14 @@ namespace UI.Controllers
 {
     public class AccountController : Controller
     {
-        private IUserService UserService => HttpContext.GetOwinContext().GetUserManager<IUserService>();
+        private readonly IUserService _userService;
 
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
+
+        public AccountController(IUserService userService)
+        {
+            _userService = userService;
+        }
 
         public ActionResult Login()
         {
@@ -32,17 +35,17 @@ namespace UI.Controllers
             if (ModelState.IsValid)
             {
                 ApplicationUserDTO userDto = new ApplicationUserDTO { UserName = model.Email, Password = model.Password };
-                ClaimsIdentity claim = UserService.Authenticate(userDto);
+                ClaimsIdentity claim = _userService.Authenticate(userDto);
                 if (claim == null)
                 {
                     ModelState.AddModelError("", "Неверный логин или пароль.");
                 }
                 else
                 {
-                    AuthenticationManager.SignOut();
+                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
                     AuthenticationManager.SignIn(new AuthenticationProperties
                     {
-                        IsPersistent = true
+                        IsPersistent = model.IsPersistent
                     }, claim);
                     return RedirectToAction("Index", "Home");
                 }
@@ -67,7 +70,7 @@ namespace UI.Controllers
                     Password = model.Password,
                     UserProfileName = model.UserProfileName
                 };
-                OperationDetails operationDetails = UserService.CreateUser(userDto);
+                OperationDetails operationDetails = _userService.CreateUser(userDto);
                 if (operationDetails.Succedeed)
                     return RedirectToAction("Login", "Account");
                 ModelState.AddModelError(operationDetails.Property, operationDetails.Message);

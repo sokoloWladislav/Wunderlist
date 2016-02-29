@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL.Entities;
+using DAL.Interface.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAL
 {
     public class ApplicationContext : IdentityDbContext<ApplicationUserEntity>
     {
-        static ApplicationContext()
+        public ApplicationContext() : base("DefaultConnection")
         {
             Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationContext>());
         }
