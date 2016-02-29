@@ -62,6 +62,7 @@
     <Compile Include="Repositories\TodoItemRepository.cs" />
     <Compile Include="Repositories\TodoListRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

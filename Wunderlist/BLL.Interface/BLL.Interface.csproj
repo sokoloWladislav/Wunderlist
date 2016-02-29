@@ -44,7 +44,6 @@
     <Compile Include="DTO\TodoItemDTO.cs" />
     <Compile Include="DTO\TodoListDTO.cs" />
     <Compile Include="Infrastructure\OperationDetails.cs" />
-    <Compile Include="Interfaces\IServiceCreator.cs" />
     <Compile Include="Interfaces\ITodoItemService.cs" />
     <Compile Include="Interfaces\ITodoListService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />

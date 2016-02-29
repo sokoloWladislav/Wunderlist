@@ -21,9 +21,6 @@ namespace DependencyResolver
             kernel.Bind(typeof(DbContext)).To(typeof(ApplicationContext)).InRequestScope();
             kernel.Bind<IdentityDbContext<ApplicationUserEntity>>().To<ApplicationContext>().InRequestScope();
             kernel.Bind(typeof(IUserStore<ApplicationUserEntity>)).To(typeof(UserStore<ApplicationUserEntity>)).InRequestScope();
-            /*kernel.Bind<IUserStore<ApplicationUserEntity>>()
-                .To<UserStore<ApplicationUserEntity>>()
-                .WithConstructorArgument("context", kernel.Get<IdentityDbContext<ApplicationUserEntity>>());*/
             kernel.Bind(typeof (UserManager<ApplicationUserEntity>))
                 .ToSelf();
             kernel.Bind<ITodoItemRepository>().To<TodoItemRepository>();
@@ -32,7 +29,7 @@ namespace DependencyResolver
             kernel.Bind<ITodoListService>().To<TodoListService>();
             kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<ApplicationUserManager>().To<ApplicationUserManager>();
-            
+            kernel.Bind<IUserRepository>().To<UserRepository>();
 
 
         }

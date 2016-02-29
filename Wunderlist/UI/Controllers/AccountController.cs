@@ -14,19 +14,17 @@ namespace UI.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUserService _userService;// => HttpContext.GetOwinContext().GetUserManager<IUserService>();
+        private readonly IUserService _userService;
 
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         public AccountController(IUserService userService)
         {
             _userService = userService;
-            //_authenticationManager = authenticationManager;
         }
 
         public ActionResult Login()
         {
-            var f = User.Identity.GetUserId();
             return View();
         }
 
@@ -44,11 +42,10 @@ namespace UI.Controllers
                 }
                 else
                 {
-                    //_authenticationManager.SignOut();
                     AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
                     AuthenticationManager.SignIn(new AuthenticationProperties
                     {
-                        IsPersistent = true
+                        IsPersistent = model.IsPersistent
                     }, claim);
                     return RedirectToAction("Index", "Home");
                 }
