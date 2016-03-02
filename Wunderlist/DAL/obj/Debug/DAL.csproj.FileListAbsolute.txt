@@ -1,0 +1,14 @@
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\bin\Debug\DAL.dll.config
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\bin\Debug\DAL.dll
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\bin\Debug\DAL.pdb
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\bin\Debug\EntityFramework.dll
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\bin\Debug\EntityFramework.SqlServer.dll
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\bin\Debug\EntityFramework.xml
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\bin\Debug\EntityFramework.SqlServer.xml
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\obj\Debug\DAL.dll
+F:\Epam\ExtremeTraining\WunderlistProject\Wunderlist\DAL\obj\Debug\DAL.pdb
