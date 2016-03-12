@@ -9,6 +9,7 @@ namespace BLL.Interface.Interfaces
     {
         OperationDetails CreateTodoItem(TodoItemDTO item);
         OperationDetails DeleteTodoItem(TodoItemDTO item);
+        OperationDetails UpdateTodoItem(TodoItemDTO item);
         TodoItemDTO GetTodoItemById(int id);
         IEnumerable<TodoItemDTO> GetAllTodoItems();
     }
