@@ -12,6 +12,6 @@ namespace DAL.Interface.Entities
         public byte[] ProfileImageSmall { get; set; }
         public string ProfileName { get; set; }
         
-        public ApplicationUserEntity UserEntity { get; set; }
+        public virtual ApplicationUserEntity UserEntity { get; set; }
     }
 }

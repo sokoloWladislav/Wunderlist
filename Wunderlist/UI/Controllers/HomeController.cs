@@ -8,10 +8,10 @@ using System.Web.UI.WebControls;
 
 namespace UI.Controllers
 {
-    public class HomeController : ApiController
+    public class HomeController : Controller
     {
         
-        /*public ActionResult Index()
+        public ActionResult Index()
         {
             ViewBag.Name = User.Identity.Name;
             return View();
@@ -22,6 +22,6 @@ namespace UI.Controllers
             ViewBag.Message = "privacy-policy page";
 
             return View();
-        }*/
+        }
     }
 }
