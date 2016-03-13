@@ -11,5 +11,6 @@ namespace DAL.Interface.Entities
     {
         public string UserProfileName { get; set; }
         public virtual ICollection<TodoListEntity> TodoLists { get; set; } = new List<TodoListEntity>();
+        public virtual UserProfile Profile { get; set; }
     }
 }

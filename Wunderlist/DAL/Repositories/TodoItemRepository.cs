@@ -37,6 +37,7 @@ namespace DAL.Repositories
                 entity.IsCompleted = item.IsCompleted;
                 entity.Name = item.Name;
                 entity.Note = item.Note;
+                entity.OrderNumber = item.OrderNumber;
                 entity.TodoListEntityId = item.TodoListEntityId;
                 _db.Entry(item).State = EntityState.Modified;
             }
