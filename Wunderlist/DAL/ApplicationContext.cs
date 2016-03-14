@@ -8,7 +8,7 @@ namespace DAL
     {
         public ApplicationContext() : base("DefaultConnection")
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationContext>());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

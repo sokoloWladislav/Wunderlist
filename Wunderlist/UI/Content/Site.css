@@ -1,24 +1,287 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿html, body, div, input {
+    padding: 0;
+    margin: 0;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+body {
+	color: #423e3e;
+	font-weight: 400;
+	margin-top: 40px;
+	background-color: #fafafa;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+input, textarea, button, select {
+    outline: none;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+body, input, button {
+    font-family: "Lato","Open Sans","Microsoft Yahei","微软雅黑",STXihei,"华文细黑","Hiragino Kaku Gothic Pro",Osaka,'ＭＳ Ｐゴシック','MS PGothic','メイリオ',Meiryo,"Geneva CY","Lucida Grande","Arial Unicode MS","Helvetica Neue","Arial",Sans-Serif;
 }
+
+.logo {
+	height: 80px;
+	background-image: url("https://d2hkcehpyog59.cloudfront.net/3115f3e4c221acb12a1cd87ad613d6011f85e805/wl_icon.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	margin: auto;
+}
+
+input {
+    background-color: white;
+    cursor: auto;
+    padding: 1px;
+    border: none;
+}
+
+.card {
+	max-width: 370px;
+    min-width: 320px;
+    margin: 30px auto 20px auto;
+    padding: 0 10px;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.auth-form {
+	background-color: #fff;
+    border: 1px solid #ddd;
+    -webkit-box-shadow: 0 1px 3px rgba(50,50,50,0.08);
+    box-shadow: 0 1px 3px rgba(50,50,50,0.08);
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.auth-form.login {
+    height: 230px;
+}
+
+.auth-form .row {
+    height: 60px;
+    margin: 0;
+    border-bottom: 1px solid #eee;
+}
+
+.auth-form .row .icon {
+    display: inline-block;
+    margin: 0 11px 0 16px;
+}
+
+.auth-form .row .icon.email {
+    width: 21px;
+    height: 18px;
+    margin-top: 20px;
+}
+
+.aurh-form .row.email {
+    border: 0 none;
+    font-size: 16px;
+    line-height: 15px;
+    padding: 20px 8px;
+    margin-right: 2px;
+    color: #666;
+}
+
+.auth-form .row .icon.padlock {
+    width: 21px;
+    height: 25px;
+    margin-top: 16px;
+}
+
+.auth-form .row.submit {
+    border-bottom: none;
+    padding: 0 15px;
+}
+
+.auth-form .row.submit input.button {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    padding: 11px 10px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    margin: 18px auto;
+    font-weight: bold;
+}
+
+.auth-form.signup {
+    height: 255px;
+}
+
+.auth-form .row.name, .auth-form .row.email, .auth-form .row.password, .auth-form .row.confirmation {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.auth-form .row .icon.person {
+    width: 20px;
+    height: 22px;
+    margin-top: 19px;
+}
+
+.button {
+    cursor: pointer;
+    -webkit-border-radius: 0;
+}
+
+.button.blue {
+    border: 0 none;
+    background-color: #2b88d9;
+    color: #fff;
+}
+
+.link.forgot-password {
+    font-size: 14px;
+}
+
+.link.forgot-password, .link.signup, .link.login {
+    display: block;
+    text-align: center;
+}
+
+.link.forgot-password a, .link.signup a, .link.login a {
+    color: #1b7edf;
+    text-decoration: none;
+}
+
+.link.signup, .link.login {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 15px;
+    color: #666;
+}
+
+h4.branding.signup {
+    margin: 18px auto 0 auto;
+    text-align: center;
+    font-size: 42px;
+    font-weight: 300;
+    color: #666;
+}
+
+.wrapper.signup {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    max-width: 840px;
+    margin: 50px auto 30px auto;
+}
+
+.wrapper.signup .card.benefits {
+    border: 0 solid #ddd;
+    border-width: 0 0 0 1px;
+    list-style: none;
+}
+
+.wrapper.signup .card {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -o-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+ul.benefits li {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 80px;
+    margin: 0 10px 25px 0;
+}
+
+ul.benefits li .icon {
+    display: inline-block;
+    margin-top: 12px;
+}
+
+ul.benefits li .icon.tick {
+    width: 38px;
+    height: 34px;
+    margin-left: 25px;
+    margin-right: 27px;
+}
+
+ul.benefits li .icon.cloud {
+    width: 50px;
+    height: 37px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+ul.benefits li .icon.people {
+    width: 44px;
+    height: 37px;
+    margin-left: 25px;
+    margin-right: 21px;
+}
+
+ul.benefits li .details {
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -o-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+a[target="_blank"], a[target="_blank"]:visited {
+    color: #2b88d9;
+    text-decoration: none;
+}
+
+.small, .small a {
+    font-size: 12px;
+    line-height: 15px;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+ul.benefits li .details summary {
+    display: block;
+    color: #2b88d9;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    margin-bottom: 8px;
+    line-height: 1.3em;
+}
+
+@media screen and (max-width: 840px) {
+    ul.benefits {
+        display: none;
+    }
+    .wrapper.signup .card.signup {
+        margin: 0 auto;
+    }
+    .wrapper.signup {
+     margin-top: 20px; 
+    }
+}
+
+
+
+
+
+
