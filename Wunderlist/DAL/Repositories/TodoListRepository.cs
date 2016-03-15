@@ -9,10 +9,11 @@ namespace DAL.Repositories
 {
     public class TodoListRepository : ITodoListRepository
     {
-        private readonly IdentityDbContext<ApplicationUserEntity> _db;
+        //private readonly IdentityDbContext<ApplicationUserEntity> _db;
+        private readonly DbContext _db;
         private readonly DbSet<TodoListEntity> _todoListDbSet; 
 
-        public TodoListRepository(IdentityDbContext<ApplicationUserEntity> context)
+        public TodoListRepository(DbContext context)
         {
             _db = context;
             _todoListDbSet = context.Set<TodoListEntity>();
@@ -20,7 +21,8 @@ namespace DAL.Repositories
 
         public void Create(TodoListEntity item)
         {
-            _todoListDbSet.Add(item);
+            //_todoListDbSet.Add(item);
+            _db.Set<TodoListEntity>().Add(item);
         }
 
         public void Delete(TodoListEntity item)

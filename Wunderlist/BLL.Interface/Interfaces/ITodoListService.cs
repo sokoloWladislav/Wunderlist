@@ -9,6 +9,7 @@ namespace BLL.Interface.Interfaces
     {
         OperationDetails CreateTodoList(TodoListDTO list);
         OperationDetails DeleteTodoList(TodoListDTO list);
+        OperationDetails UpdateTodoList(TodoListDTO list);
         TodoListDTO GetTodoListById(int id);
         IEnumerable<TodoListDTO> GetAllTodoLists();
         IEnumerable<TodoListDTO> GetAllUserTodoLists(string userId);

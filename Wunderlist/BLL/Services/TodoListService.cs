@@ -36,6 +36,18 @@ namespace BLL.Services
                 return new OperationDetails(true, "TodoList успешно добавлен", "");
         }
 
+        public OperationDetails UpdateTodoList(TodoListDTO todoList)
+        {
+            var todoListEntity = new TodoListEntity
+            {
+                Name = todoList.Name
+            };
+            _todoListRepository.Update(todoListEntity);
+            db.Commit();
+            return new OperationDetails(true, "TodoList успешно обновлен", "");
+        }
+
+
         public OperationDetails DeleteTodoList(TodoListDTO todoList)
         {
             TodoListEntity todoListEntity = _todoListRepository.GetTodoListById(todoList.Id);
@@ -56,7 +68,17 @@ namespace BLL.Services
 
         public IEnumerable<TodoListDTO> GetAllTodoLists()
         {
-            var todoLists = _mapper.Map<IEnumerable<TodoListEntity>, List<TodoListDTO>>(_todoListRepository.GetAllTodoLists());
+            //var todoLists = _mapper.Map<IEnumerable<TodoListEntity>, IEnumerable<TodoListDTO>>(_todoListRepository.GetAllTodoLists());
+            var todoLists =
+                _todoListRepository.GetAllTodoLists()
+                    .Select(
+                        list =>
+                            new TodoListDTO()
+                            {
+                                ApplicationUserEntityId = list.ApplicationUserEntityId,
+                                Id = list.Id,
+                                Name = list.Name
+                            });
             return todoLists;
         }
 

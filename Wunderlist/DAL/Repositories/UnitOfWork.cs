@@ -1,13 +1,14 @@
-﻿using DAL.Interface.Repositories;
+﻿using System.Data.Entity;
+using DAL.Interface.Repositories;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DAL.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly IdentityDbContext _db;
+        private readonly DbContext _db;
         
-        public UnitOfWork(IdentityDbContext dbContext)
+        public UnitOfWork(DbContext dbContext)
         {
             _db = dbContext;
         }
