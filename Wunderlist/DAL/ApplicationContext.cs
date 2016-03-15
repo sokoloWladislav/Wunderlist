@@ -8,13 +8,13 @@ namespace DAL
     {
         public ApplicationContext() : base("DefaultConnection")
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<ApplicationContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ApplicationContext>());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<UserProfile>().HasRequired(x => x.UserEntity);
+            //modelBuilder.Entity<ApplicationUserEntity>().HasOptional(x => x.Profile).WithRequired(z=>z.UserEntity);
         }
 
         public ApplicationContext(string connectionString) : base(connectionString) { }

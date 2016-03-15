@@ -34,7 +34,7 @@ namespace BLL.Services
             {
                 appUser = new ApplicationUserEntity { UserName = user.UserName, UserProfileName = user.UserProfileName };
                 _userRepository.CreateUserEntity(appUser,user.Password);
-                _uow.Commit();
+                //_uow.Commit();
                 return new OperationDetails(true, "Регистрация успешно пройдена", "");
             }
             return new OperationDetails(false, "Пользователь с таким email уже существует", "");

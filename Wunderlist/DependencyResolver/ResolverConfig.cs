@@ -17,9 +17,10 @@ namespace DependencyResolver
     {
         public static void Configure(this IKernel kernel)
         {
-            kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
+            
             kernel.Bind(typeof(DbContext)).To(typeof(ApplicationContext)).InRequestScope();
-            kernel.Bind<IdentityDbContext<ApplicationUserEntity>>().To<ApplicationContext>().InRequestScope();
+            //kernel.Bind<IdentityDbContext<ApplicationUserEntity>>().To<ApplicationContext>().InRequestScope();
+            kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope();
             kernel.Bind(typeof(IUserStore<ApplicationUserEntity>)).To(typeof(UserStore<ApplicationUserEntity>)).InRequestScope();
             kernel.Bind(typeof (UserManager<ApplicationUserEntity>))
                 .ToSelf();
@@ -28,7 +29,7 @@ namespace DependencyResolver
             kernel.Bind<ITodoItemService>().To<TodoItemService>();
             kernel.Bind<ITodoListService>().To<TodoListService>();
             kernel.Bind<IUserService>().To<UserService>();
-            kernel.Bind<ApplicationUserManager>().To<ApplicationUserManager>();
+            //kernel.Bind<ApplicationUserManager>().To<ApplicationUserManager>();
             kernel.Bind<IUserRepository>().To<UserRepository>();
 
 

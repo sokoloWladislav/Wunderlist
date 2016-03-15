@@ -9,9 +9,9 @@ namespace DAL.Repositories
 {
     public class TodoItemRepository : ITodoItemRepository
     {
-        private readonly IdentityDbContext<ApplicationUserEntity> _db;
+        private readonly DbContext _db;
         private readonly DbSet<TodoItemEntity> _todoEntityDbSet;
-        public TodoItemRepository(IdentityDbContext<ApplicationUserEntity> context)
+        public TodoItemRepository(DbContext context)
         {
             _db = context;
             _todoEntityDbSet = context.Set<TodoItemEntity>();
@@ -30,7 +30,7 @@ namespace DAL.Repositories
 
         public void Update(TodoItemEntity item)
         {
-            var entity = _db.Set<TodoItemEntity>().FirstOrDefault(x => x.Id == item.Id);
+            var entity = _db.Set<TodoItemEntity>().Find(item.Id);
             if (entity != null)
             {
                 entity.DueDate = item.DueDate;
@@ -38,8 +38,7 @@ namespace DAL.Repositories
                 entity.Name = item.Name;
                 entity.Note = item.Note;
                 entity.OrderNumber = item.OrderNumber;
-                entity.TodoListEntityId = item.TodoListEntityId;
-                _db.Entry(item).State = EntityState.Modified;
+                _db.Entry(entity).State = EntityState.Modified;
             }
         }
 

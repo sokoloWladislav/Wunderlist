@@ -99,8 +99,20 @@ namespace BLL.Services
                 OrderNumber = todoItem.OrderNumber,
                 TodoListEntityId = todoItem.TodoListEntityId
             };
+            bool normalizationRequired=false;
+            if (todoItem.ChangedFromCompletedToIncompleted)
+                todoItem.OrderNumber = GetToDoItemOrderingNumber(todoItem.TodoListEntityId, -1,
+                    out normalizationRequired);
+            else
+            {
+                if (todoItem.IncertToPlace > -1)
+                    todoItem.OrderNumber = GetToDoItemOrderingNumber(todoItem.TodoListEntityId, -1,
+                        out normalizationRequired);
+            }
             _todoItemRepository.Update(entity);
             db.Commit();
+            if(normalizationRequired)
+                NormalizeToDoItemOrderingNumbers();
             return new OperationDetails(true, "TodoItem успешно изменён", "");
         }
 
