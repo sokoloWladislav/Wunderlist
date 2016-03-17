@@ -1,218 +1,46 @@
 ﻿
 @{
-    ViewBag.Title = "User Profile";
+    Layout = null;
 }
 
-
-
-@section scripts
-{
-    <script type="text/javascript">
-        $(document).ready(function () {
-            GetListOfToDoLists();
-            $("#create-todo-list-button").click(function(event) {
-                event.preventDefault();
-                AddTodoList();
-            });
-            $("#create-todo-item-button").click(function (event) {
-                event.preventDefault();
-                AddTodoItem();
-            });
-            $("#todo-item-edit-save-button").click(function(event) {
-                event.preventDefault();
-                SaveTodoItem();
-            });
-            $("#todo-item-edit-delete-button").click(function (event) {
-                event.preventDefault();
-                DeleteTodoItem();
-            });
-            
-        });
-
-        function AddTodoList() {
-            var todolist = {
-                Name: $('#create-todo-list-name').val()
-            };
-            $.ajax({
-                url: '/api/todolist',
-                type: 'POST',
-                data: JSON.stringify(todolist),
-                contentType: "application/json;charset=utf-8",
-                
-                success: function(data) {
-                    GetListOfToDoLists();
-                },
-                error: function(x, y, z) {
-                    alert(x + '\n' + y + '\n' + z);
-                }
-            });
-        }
-
-        function AddTodoItem() {
-            var todoitem = {
-                Name: $("#create-todo-item-name").val(),
-                TodoListEntityId: $("#create-todo-item-list-id").val()
-            };
-            if (!todoitem.Name) {
-                alert("Поле Имя обязательно для заполнения!");
-                return;
-            }
-            $.ajax(
-            {
-                url: '/api/todoitem/',
-                type: 'POST',
-                data: JSON.stringify(todoitem),
-                contentType: "application/json;charset=utf-8",
-
-                success: function(data) {
-                    ShowTodoItems();
-                },
-                error: function (x, y, z) {
-                    alert(x + '\n' + y + '\n' + z);
-                }
-
-            });
-        }
-
-        function GetListOfToDoLists() {
-            $.ajax({
-                url: '/api/todolist',
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    WriteToDoListStringResult(data);
-                }
-            });
-        }
-
-        function WriteToDoListStringResult(todolists) {
-            var strresult = "<table>";
-            $.each(todolists, function(index, list) {
-                strresult += "<tr><td><a data-item='" + list.Id + "' onclick='ShowTodoItems(this);'>" + list.Name + "</a>";
-            });
-            strresult += "</table>";
-            $("#todo-list-content").html(strresult);
-
-        }
-
-        function ShowTodoItems(element) {
-            var listId = $(element).attr("data-item");
-            $("#todo-items-container").css("display", "block");
-            $("#todo-item-info").css("display", "none");
-            if (!listId) {
-                listId = $("#create-todo-item-list-id").val();
-                
-            } else {
-                $("#create-todo-item-list-id").val(listId);
-            }
-            
-            $.ajax({
-                url: '/api/todoitem/getall/',
-                type: 'GET',
-                dataType: 'json',
-                data:{Id:listId,completed:false},
-                success: function (data) {
-                    WriteToDoItemStringResult(data);
-                }
-            });
-        }
-
-        function WriteToDoItemStringResult(todoitems) {
-            var strresult = "<table>";
-            $.each(todoitems, function (index, item) {
-                strresult += "<tr><td><a data-item='" + item.Id + "' onclick='ShowTodoItemInfo(this);'>" + item.Name + "</a>";
-            });
-            strresult += "</table>";
-            $("#todo-item-content").html(strresult);
-        }
-
-        function ShowTodoItemInfo(element) {
-
-            var todoItemId = $(element).attr("data-item");
-            $.ajax({
-                url: '/api/todoitem/gettodoitem/' + todoItemId,
-                type: 'GET',
-                dataType: 'json',
-                success: function (data) {
-                    WriteToDoItemInfoResult(data);
-                }
-            });
-        }
-
-        function WriteToDoItemInfoResult(todoItem) {
-            $("#todo-item-info").css("display", "block");
-            $("#todo-item-edit-id").val(todoItem.Id);
-            $("#todo-item-edit-name").val(todoItem.Name);
-            $("#todo-item-edit-datetime").val(todoItem.DueDate);
-            $("#todo-item-edit-completed").prop('checked',todoItem.IsCompleted);
-
-        }
-
-        function SaveTodoItem() {
-            var id = $("#todo-item-edit-id").val();
-            var todoitem= {
-                id: $("#todo-item-edit-id").val(),
-                name: $("#todo-item-edit-name").val(),
-                duedate: $("#todo-item-edit-datetime").val(),
-                IsCompleted: $("#todo-item-edit-completed").prop('checked'),
-                note:$("#todo-item-edit-note").val()
-            }
-            $.ajax({
-                url: '/api/todoitem/'+id,
-                type: 'PUT',
-                data: JSON.stringify(todoitem),
-                contentType: "application/json;charset=utf-8",
-                success: function (data) {
-                    ShowTodoItems();
-                }
-            });
-        }
-        function DeleteTodoItem() {
-            var id = $("#todo-item-edit-id").val();
-            if (!confirm("Вы уверены, что хотите удалить эту задачу?"))
-                return;
-            $.ajax({
-                url: '/api/todoitem/' + id,
-                type: 'DELETE',
-                dataType: 'json',
-                contentType: "application/json;charset=utf-8",
-                success: function (data) {
-                    ShowTodoItems();
-                }
-            });
-        }
-
-        
-    </script>
-}
-<div id="content" style="display: block; width: 100%;">
-    <div id="todo-item-list" style="width: 20%; float: left;">
-        <div id="create-todo-list-block">
-            <input type="text" id="create-todo-list-name"/>
-            <button id="create-todo-list-button">Добавить</button>
+<!DOCTYPE html>
+<html ng-app="wunderlistApp">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="icon" href="https://d2hkcehpyog59.cloudfront.net/44685ca8cfaade90d24f718bf876257562a21214/favicon.ico" type="image/x-icon">
+    @Styles.Render("~/Content/UserProfile")
+</head>
+<body>
+<div ng-controller="todoListController">
+    <div id="lists">
+        <div id="search"></div>
+        <div id="userProfileSection">@ViewBag.UserProfileName</div>
+        <ul>
+            <li ng-repeat="todoList in TodoLists">
+                <div>{{todoList.Name}}</div>
+            </li>
+        </ul>
+        <div id="creationButton" ng-click="createForm()">Создать список</div>
+    </div>
+    <form id="createForm" name="creationForm">
+        <div class="row">Создать cписок</div>
+        <div class="row">
+            <input id="TodoListName" ng-model="TodoList.Name" required placeholder="Введите название списка дел" />
         </div>
-        <div id="todo-list-content"></div>
-    </div>
-    <div id="todo-items-container" style="float: left; display: none; width: auto;">
-        <div id="todo-item-create-block">
-            <input type="hidden" id="create-todo-item-list-id"/>
-            <input type="text" id="create-todo-item-name"/>
-            <button id="create-todo-item-button">Добавить</button>
+        <div class="row buttons">
+            <button type="button" ng-click="cancel()" class="cancelButton">Отмена</button>
+            <button type="submit" ng-click="save(TodoList, creationForm)" class="submitButton">Сохранить</button>
         </div>
-        <div id="todo-item-content"></div>
-    </div>
-    <div id="todo-item-info" style="width: 20%; display: none; float: left;">
-        <table>
-            <tr><td><input type="hidden" id="todo-item-edit-id" /></td><td></td></tr>
-            <tr><td><label>Название: </label></td><td><input type="text" id="todo-item-edit-name" /></td></tr>
-            <tr><td><label>Дата окончания: </label></td><td><input type="text"  id="todo-item-edit-datetime"/></td></tr>
-            <tr><td><label>Завершена: </label></td><td><input type="checkbox" id="todo-item-edit-completed" /></td></tr>
-            <tr><td><label>Заметка: </label></td><td><input type="text" id="todo-item-edit-note"/></td></tr>
-            <tr><td><button id="todo-item-edit-save-button">Сохранить</button></td><td><button id="todo-item-edit-delete-button">Удалить</button></td></tr>
-        </table>
-    </div>
+    </form>
 </div>
-@Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+    
 
-@Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
-@Scripts.Render("~/scripts/jquery-ui-1.11.4.js")
+<div id="overlay"></div>
+@Scripts.Render("~/bundles/profile")
+</body>
+</html>
+
+
+    

@@ -1,0 +1,111 @@
+﻿* {
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    background: url(https://static.wunderlist.com/7301e219acb02266587ce610bd91f33ed6d31607/images/backgrounds/1024/06.jpg);
+    background-size: 100%;
+    background-attachment: fixed;
+    color: #262626;
+    font-weight: 500;
+    font-family: "Lato","Geneva CY","Lucida Grande","Arial Unicode MS","Helvetica Neue","Helvetica","Arial",sans-serif;
+}
+
+#overlay {
+  background-color: #000;
+  height: 100%;
+  left: 0;
+  opacity: 0.5;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+    display: none;
+}
+
+#lists {
+    width: 280px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    z-index: 2;
+}
+
+#search {
+    background: #5B7A59;
+    width: 280px;
+    height: 7%;
+}
+
+#userProfileSection {
+    height: 7%;
+    background: #f7f7f7;
+    padding-left: 50px;
+    font-size: 20px;
+    line-height: 40px;
+}
+
+ul {
+    list-style: none;
+    height: 78%;
+    background: #f7f7f7;
+}
+
+#lists li {
+    height: 38px;
+    background: #f7f7f7;
+    padding-left: 30px;
+}
+
+#creationButton {
+    height: 8%;
+    background: #f7f7f7;
+    color: #328AD6;
+    padding-left: 30px;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+#createForm {
+    position: absolute;
+    z-index: 101;
+    width: 360px;
+    height: 150px;
+    top: 80px;
+    right: 40%;
+    background: #FFFFFF;
+    display: none;
+}
+
+.row {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 20px;
+    padding-top: 20px;
+}
+
+.buttons {
+    background: #FAFAFA;
+}
+
+#createForm input {
+    padding: 5px;
+    font-size: 15px;
+    width: 80%;
+}
+
+#createForm .submitButton {
+    border: 0 none;
+    background-color: #2b88d9;
+    color: #fff;
+    padding: 5px;
+    margin-left: 10px;
+}
+
+#createForm .cancelButton {
+    border: 0 none;
+    padding: 5px;
+}

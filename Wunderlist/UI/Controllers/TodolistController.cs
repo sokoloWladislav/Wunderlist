@@ -12,12 +12,12 @@ using UI.Models;
 namespace UI.Controllers
 {
     [Authorize]
-    public class TodolistController:ApiController
+    public class TodoListController:ApiController
     {
         private readonly ITodoListService _todoListService;
         private readonly IMapper _mapper;
 
-        public TodolistController(ITodoListService todoListService)
+        public TodoListController(ITodoListService todoListService)
         {
             _todoListService = todoListService;
             var config = new MapperConfiguration(cfg => { cfg.CreateMap<TodoListViewModel, TodoListDTO>(); });
@@ -25,7 +25,7 @@ namespace UI.Controllers
         }
 
         [ActionName("Get")]
-        public IEnumerable<TodoListViewModel> Get()
+        public IEnumerable<TodoListViewModel> GetTodoLists()
         {
             var enumerable = _todoListService.GetAllTodoLists();
             return enumerable.Where(x=>x.ApplicationUserEntityId==User.Identity.GetUserId()).Select(
@@ -40,7 +40,7 @@ namespace UI.Controllers
 
         
         [HttpGet]
-        public TodoListViewModel GeTodoList(int id)
+        public TodoListViewModel GetTodoList(int id)
         {
             return _mapper.Map<TodoListDTO, TodoListViewModel>(_todoListService.GetTodoListById(id));
         }
